@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aya 💘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffe6ef;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      width: 320px;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    p {
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 18px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      margin: 6px;
+      transition: transform 0.2s ease;
+    }
+
+    .yes {
+      background: #ff4d88;
+      color: white;
+    }
+
+    .no {
+      background: #f2f2f2;
+      color: #555;
+    }
+
+    .try-again {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #888;
+      min-height: 18px;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: floatUp 1.5s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-120px) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Aya 💖</h1>
+    <p>Will you be my Valentine?</p>
+
+    <div>
+      <button class="yes" id="yesBtn" onclick="sayYes()">Yes 💘</button>
+      <button class="no" id="noBtn" onclick="sayNo()">No 😅</button>
+    </div>
+
+    <div class="try-again" id="tryAgain"></div>
+
+    <div class="message" id="love">
+      i love you so much you will always be my baby and valentine forever ❤️
+    </div>
+  </div>
+
+  <script>
+    let yesScale = 1;
+    let noScale = 1;
+    let noClicks = 0;
+
+    function sayNo() {
+      noClicks++;
+
+      yesScale += 0.15;
+      noScale -= 0.15;
+      if (noScale < 0.4) noScale = 0.4;
+
+      document.getElementById("yesBtn").style.transform = `scale(${yesScale})`;
+      document.getElementById("noBtn").style.transform = `scale(${noScale})`;
+
+      if (noClicks >= 3) {
+        document.getElementById("tryAgain").textContent = "girl be so fr";
+      } else {
+        document.getElementById("tryAgain").textContent = "try again 😌";
+      }
+    }
+
+    function sayYes() {
+      document.getElementById("love").style.display = "block";
+      document.getElementById("tryAgain").textContent = "";
+
+      for (let i = 0; i < 30; i++) {
+        createHeart();
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = "❤️";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = Math.random() * window.innerHeight + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 1500);
+    }
+  </script>
+
+</body>
+</html>
